@@ -6,39 +6,104 @@ function DescriptionCard (props){
     const ingredients = props.ingredients;
     {console.log(ingredients)}
     return (
-        <div class="container my-32 mx-auto p-4 md:p-0 ">
-            <div class="shadow-lg flex flex-wrap w-full lg:w-4/5 mx-auto">
-                <img class="bg-cover bg-bottom border w-full md:w-1/3 h-64 md:h-auto relative" src={recipe.image}/>
-                    <div class="absolute text-xl">
-                        <i class="fa fa-heart text-white hover:text-red-light ml-4 mt-4 cursor-pointer"></i>
+        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+            <div className="grid gap-5 row-gap-10 lg:grid-cols-2">
+                <div className="flex flex-col justify-center">
+                    <div className="max-w-xl mb-6">
+                        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl ">
+                            <span className="relative inline-block">
+                                <svg viewBox="0 0 52 24" fill="currentColor" className="absolute top-0 left-2 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
+                                    <defs>
+                                        <pattern id="5dc90b42-5ed4-45a6-8e63-2d78ca9d3d95" x="0" y="0" width=".135" height=".30">
+                                            <circle cx="1" cy="1" r=".7" />
+                                        </pattern>
+                                    </defs>
+                                    <rect fill="url(#5dc90b42-5ed4-45a6-8e63-2d78ca9d3d95)" width="52" height="24"/>
+                                </svg>
+                            <span className="relative">{recipe.name}</span>
+                            </span>{' '}
+                        </h2>
+                        <p className="max-w-lg mb-6 font-sans text-2xl tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
+                            Por {recipe.user}
+                        </p>
+                        <p className="text-base text-gray-700 md:text-lg">
+                            {recipe.description}
+                        </p>
                     </div>
-                <div class="bg-white w-full md:w-2/3">
-                
-                    <div class="h-full mx-auto px-6 md:px-0 md:pt-6 md:-ml-6 relative">
-                        <div class="bg-white lg:h-full p-6 -mt-6 md:mt-0 relative mb-4 md:mb-0 flex flex-wrap md:flex-wrap items-center">
-                            <div class="w-full lg:w-1/5 lg:border-right lg:border-solid text-center md:text-left">
-                                <h3>{recipe.name}</h3>
-                                <p class="mb-0 mt-3 text-grey-dark text-sm italic">{recipe.user}</p>
-                                <hr class="w-1/4 md:ml-0 mt-4  border lg:hidden" />
-                            </div>
-                            <div class="w-full lg:w-3/5 lg:px-3">
-                                <p class="text-md mt-4 lg:mt-0 text-justify md:text-left text-sm">
 
-                                    {ingredients.map( (ingredient) => 
-                                        <p>{ingredient.name} <br></br></p>
-                                    )}
-
-                                    {recipe.description}
-                                </p>
-                            </div>
-                            <div class="w-full lg:w-1/5 mt-6 lg:mt-0 lg:px-4 text-center md:text-left">
-                                <button class="bg-white hover:bg-grey-darker hover:text-white border border-solid border-grey w-1/3 lg:w-full py-2">Visit now</button>
-                            </div>
-                        </div>
+                    <p className="ml-4 text-sm font-bold tracking-widest uppercase">
+                        Ingredientes
+                    </p>
+                    <div className="grid space-y-3 sm:gap-2 sm:grid-cols-2 sm:space-y-0">
+                        {ingredients.map( (ingredient) => 
+                            <ul className="space-y-3">
+                                <li className="flex">
+                                    <span className="mr-1">
+                                        <svg className="w-5 h-5 mt-px text-deep-purple-accent-400" stroke="currentColor" viewBox="0 0 52 52">
+                                            <polygon
+                                            strokeWidth="4"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            fill="none"
+                                            points="29 13 14 29 25 29 23 39 38 23 27 23"
+                                            />
+                                        </svg>
+                                    </span>
+                                    {ingredient.name}
+                                </li>
+                            </ul>
+                        )}
                     </div>
+                </div>
+                <div>
+                <img
+                    className="object-cover w-full h-56 rounded shadow-lg sm:h-96 object-scale-down"
+                    src={recipe.image}
+                    alt=""
+                />
                 </div>
             </div>
         </div>
+        // <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        //     <div className="mx-auto sm:text-center lg:max-w-2xl">
+        //         <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+        //         <div>
+        //             <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+        //                 Por {recipe.user}
+        //             </p>
+        //         </div>
+        //             <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+        //                 <span className="relative inline-block">
+        //                 <svg viewBox="0 0 52 24" fill="currentColor" className="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
+        //                     <defs>
+        //                         <pattern id="5dc90b42-5ed4-45a6-8e63-2d78ca9d3d95" x="0" y="0" width=".135" height=".30">
+        //                             <circle cx="1" cy="1" r=".7" />
+        //                         </pattern>
+        //                     </defs>
+        //                     <rect fill="url(#5dc90b42-5ed4-45a6-8e63-2d78ca9d3d95)" width="52" height="24"/>
+        //                 </svg>
+        //                 <span className="relative">{recipe.name}</span>
+        //                 </span>{' '}
+        //             </h2>
+        //             <p className="text-base text-gray-700 md:text-lg">
+        //                 {ingredients.map( (ingredient) => 
+        //                  <p>{ingredient.name} <br></br></p>
+        //                 )}
+        //             </p>
+        //         </div>
+        //         <div className="w-45 bg-base-100 image-full hover:scale-105 duration-500 transform transition"> 
+        //             <img
+        //                 className="w-full h-80 bg-center bg-cover rounded-lg object-scale-down"
+        //                 src={recipe.image}
+        //                 alt=""
+        //             />
+        //         </div>
+        //             <p className="max-w-xl mb-4 text-base text-gray-700 sm:mx-auto">
+        //                 {recipe.description}
+        //             </p>
+                    
+        //         </div>
+        // </div>
     )
 }
 
