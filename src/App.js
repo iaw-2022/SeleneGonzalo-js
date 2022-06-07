@@ -3,6 +3,7 @@ import {
   Route
 } from "react-router-dom";
 import './App.css';
+import DescriptionRecipe from "./layouts/DescriptionRecipe";
 import Recipes from "./layouts/Recipes";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path = '/recipes' element = {<Recipes />} />
+        <Route path = '/recipe/:id' element = {<DescriptionRecipe />} />
       </Routes>
     </div>
   );

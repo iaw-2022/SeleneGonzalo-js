@@ -1,9 +1,9 @@
 function Footer(){
     return(
-        <footer className="flex flex-col items-center justify-between px-6 py-4 bg-white dark:bg-gray-800 sm:flex-row">
-            <p className="text-xl font-bold text-gray-800 dark:text-white hover:text-gray-700 dark:hover:text-gray-300">RECETACCS</p>
+        <footer className="bottom-0 left-0 w-full flex flex-col items-center justify-between px-6 py-4 bg-white dark:bg-yellow-500 sm:flex-row">
+            <p className="text-xl font-bold text-gray-800 dark:text-black hover:text-gray-700 dark:hover:text-gray-300">RECETACCS</p>
             
-            <p className="py-2 text-gray-800 dark:text-white sm:py-0">Todos los derechos reservados deaaaaa</p>
+            <p className="py-2 text-gray-800 dark:text-black sm:py-0">Todos los derechos reservados</p>
 
             <div className="flex -mx-2">
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"
