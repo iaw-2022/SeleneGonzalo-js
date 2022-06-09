@@ -59,7 +59,19 @@ const ingredients = [
   }
 ]
 
+const categories = [
+  {
+    "id_categoria": "1",
+    "name": "Desayuno"
+  },
+  {
+    "id_categoria": "3",
+    "name": "Merienda"
+  }
+]
+
 module.exports = {
   recipes,
-  ingredients
+  ingredients,
+  categories
 }

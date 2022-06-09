@@ -1,96 +1,76 @@
 function TemplateRecipe (){
     return (
-        <section class="bg-gray-100">
-            <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-                <div class="lg:py-12 lg:col-span-2">
-                    <p class="max-w-xl text-lg">
+        <section className="bg-gray-100">
+            <div cclassNamelass="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
+                <div className="lg:py-12 lg:col-span-2">
+                    <p className="max-w-xl text-lg">
                         ¡Comparte con el resto de la comunidad tus recetas mas exquisitas!
                     </p>
 
-                    <div class="mt-8">
-                    <a href="" class="text-2xl font-bold text-pink-600"> Nadie nace siendo un gran cocinero... <br></br> ¡se aprende intentando!  </a>
+                    <div className="mt-8">
+                    <a href="" className="text-2xl font-bold text-pink-600"> Nadie nace siendo un gran cocinero... <br></br> ¡se aprende intentando!  </a>
                     </div>
                 </div>
 
-                <div class="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3">
-                    <form action="" class="space-y-4">
+                <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3">
+                    <form action="" className="space-y-4">
                     <div>
-                        <label class="sr-only" for="name">Nombre de la receta</label>
-                        <input class="w-full p-3 text-sm border-gray-200 rounded-lg" placeholder="Name" type="text" id="name" />
+                        <label className="sr-only" for="name">Nombre de la receta</label>
+                        <input className="w-full p-3 text-sm border-gray-200 rounded-lg" placeholder="Nombre receta" type="text" id="name" />
                     </div>
 
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div>
-                        <label class="sr-only" for="email">Email</label>
-                        <input
-                            class="w-full p-3 text-sm border-gray-200 rounded-lg"
-                            placeholder="Email address"
-                            type="email"
-                            id="email"
-                        />
-                        </div>
-
-                        <div>
-                        <label class="sr-only" for="phone">Phone</label>
-                        <input
-                            class="w-full p-3 text-sm border-gray-200 rounded-lg"
-                            placeholder="Phone Number"
-                            type="tel"
-                            id="phone"
-                        />
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
-                        <div>
-                        <input class="sr-only" id="option1" type="radio" tabindex="-1" />
-                        <label for="option1" class="block w-full p-3 border border-gray-200 rounded-lg" tabindex="0">
-                            <span class="text-sm font-medium"> Option 1 </span>
-                        </label>
-                        </div>
-
-                        <div>
-                        <input class="sr-only" id="option2" type="radio" tabindex="-1" />
-                        <label for="option2" class="block w-full p-3 border border-gray-200 rounded-lg" tabindex="0">
-                            <span class="text-sm font-medium"> Option 2 </span>
-                        </label>
-                        </div>
-
-                        <div>
-                        <input class="sr-only" id="option3" type="radio" tabindex="-1" />
-                        <label for="option3" class="block w-full p-3 border border-gray-200 rounded-lg" tabindex="0">
-                            <span class="text-sm font-medium"> Option 3 </span>
-                        </label>
+                    <div className="flex justify-center mt-8">
+                        <div className="rounded-lg shadow-xl bg-gray-50 lg:w-1/2">
+                            <div className="m-4">
+                                <label className="inline-block mb-2 text-gray-500">Subir
+                                    imagen (jpg,png,svg,jpeg)</label>
+                                <div className="flex items-center justify-center w-full">
+                                    <label className="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                        <div className="cursor-pointer flex flex-col items-center justify-center pt-7">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                className="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
+                                                fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                                Seleccione una imagen</p>
+                                        </div>
+                                        <input type="file" className="opacity-0" />
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div>
-                        <label class="sr-only" for="message">Descripción</label>
+                        <label className="sr-only" for="message">Descripción</label>
                         <textarea
-                        class="w-full p-3 text-sm border-gray-200 rounded-lg"
-                        placeholder="Message"
+                        className="w-full p-3 text-sm border-gray-200 rounded-lg"
+                        placeholder="Descripción"
                         rows="8"
                         id="message"
                         ></textarea>
                     </div>
 
-                    <div class="mt-4">
+                    <div className="mt-4">
                         <button
                         type="submit"
-                        class="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"
+                        className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"
                         >
-                        <span class="font-medium"> Cargar </span>
+                            <span className="font-medium"> Siguiente </span>
 
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 ml-3"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-5 h-5 ml-3"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
                         </button>
                     </div>
                     </form>

@@ -9,7 +9,7 @@ function DescriptionRecipe (){
     return (
         <div>
             <Header />
-            <DescriptionCard recipe={recipes.recipes[0]} ingredients ={recipes.ingredients}key={recipes.recipes[0].id}/>
+            <DescriptionCard recipe={recipes.recipes[0]} ingredients ={recipes.ingredients} categories={recipes.categories} key={recipes.recipes[0].id}/>
             <div id="carouselExampleCaptions" class="mb-6 carousel slide relative carousel-dark" data-bs-ride="carousel">
                 <div class="carousel-inner relative w-full overflow-hidden">
                     {qualifications.map(((qualification,index) => (
