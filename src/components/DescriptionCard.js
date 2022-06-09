@@ -25,26 +25,18 @@ function DescriptionCard (props){
                             <span className="relative">{recipe.name}</span>
                             </span>{' '}
                         </h2>
-                        <p className="max-w-lg mb-6 font-sans text-2xl tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
+                        <p className="max-w-lg mb-6 font-sans text-sm tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
                             Por {recipe.user} <br></br>
-                            {categories.map( (category) => 
-                            <ul className="space-y-3">
-                                <li className="flex justify-items-center">
-                                    <span className="mr-1">
-                                        <svg className="w-5 h-5 mt-px text-deep-purple-accent-400" stroke="currentColor" viewBox="0 0 52 52">
-                                            <polygon
-                                            strokeWidth="4"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            fill="none"
-                                            points="29 13 14 29 25 29 23 39 38 23 27 23"
-                                            />
-                                        </svg>
-                                    </span>
-                                    {category.name}
-                                </li>
-                            </ul>
-                        )}
+                            
+                            <div className="max-w-lg mb-6 font-sans text-sm tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
+                                <ul className="pt-3 grid grid-cols-2">
+                                    {categories.map( (category) => 
+                                        <li className="flex justify-center">
+                                            {category.name} 
+                                        </li>
+                                    )}
+                                </ul>
+                            </div>
                         </p>
                         <p className="text-base text-gray-700 md:text-lg">
                             {recipe.description}
@@ -70,8 +62,7 @@ function DescriptionCard (props){
                                             />
                                         </svg>
                                     </span>
-                                    {ingredient.name} <br></br>
-                                    {ingredient.cantidad}
+                                    {ingredient.name} {ingredient.cantidad}
                                 </li>
                             </ul>
                         )}
