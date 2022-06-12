@@ -93,13 +93,13 @@ function DescriptionCard (props){
                             <div>
                                 <label className="sr-only" for="message">Calificación</label>
                                 <textarea
-                                className="w-full p-3 text-sm border-gray-200 rounded-lg"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Calificación"
                                 rows="4"
                                 id="message"
                                 ></textarea>
                                 <textarea
-                                className="w-full p-3 text-sm border-gray-200 rounded-lg"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Puntaje"
                                 rows="1"
                                 id="message"
