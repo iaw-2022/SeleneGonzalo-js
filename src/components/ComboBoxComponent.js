@@ -1,10 +1,12 @@
 import { Fragment, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+import { setSelectionRange } from '@testing-library/user-event/dist/utils';
+
 
 
 export default function ComboBox(props) {
-    let list = props.list;
+    let list = props.data;
     let placeholder = props.placeholder;
 
     const [selectedPeople, setSelectedPeople] = useState([])
@@ -20,7 +22,7 @@ export default function ComboBox(props) {
             )
     return (
         <div className="">
-        <Combobox value={selectedPeople} onChange={setSelectedPeople} multiple>
+        <Combobox value={selectedPeople} onChange={(value) => {setSelectedPeople(value); props.setSelected(value)}} multiple>
             <Combobox.Label>{placeholder}</Combobox.Label>
             
             <div className="relative mt-1">
@@ -56,7 +58,7 @@ export default function ComboBox(props) {
                             key={entity.id}
                             className={({ active }) =>
                             `relative cursor-default select-none py-2 ${
-                                active ? 'bg-primary-500 text-white' : 'text-gray-900'
+                                active ? 'bg-yellow-300 text-black' : 'text-gray-900'
                             }`
                             }
                             value={entity}

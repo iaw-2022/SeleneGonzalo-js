@@ -1,8 +1,11 @@
 import ComboBox from "../components/ComboBoxComponent"
-
+import { useState } from 'react'
 function TemplateRecipe (props){
     const ingredients = props.ingredients;
     const categories = props.categories;
+    const [selectedIngredients, setSelectedIngredients] = useState([])
+    const [selectedCategories, setSelectedCategories] = useState([])
+
     return (
         <section className="bg-gray-100">
             <div cclassNamelass="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
@@ -21,7 +24,7 @@ function TemplateRecipe (props){
                     <form action="" className="space-y-4">
                     <div>
                         <label className="sr-only" for="name">Nombre de la receta</label>
-                        <input className="w-full p-3 text-sm border-gray-200 rounded-lg" placeholder="Nombre receta" type="text" id="name" />
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Nombre receta" type="text" id="name" />
                     </div>
 
                     <div className="flex justify-center mt-8">
@@ -52,18 +55,34 @@ function TemplateRecipe (props){
                     <div>
                         <label className="sr-only" for="message">Descripción</label>
                         <textarea
-                        className="w-full p-3 text-sm border-gray-200 rounded-lg"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Descripción"
                         rows="8"
                         id="message"
                         ></textarea>
                     </div>
 
-                    <ComboBox data={ingredients}/>
-                    <ComboBox data={categories}/>
+                    <div className = "grid grid-cols-2 gap-4">
+                        <ComboBox data={categories} placeholder={"Seleccione las categorías"} setSelected = {setSelectedCategories}/>
+                        <ComboBox data={ingredients} placeholder={"Seleccione los ingredientes"} 
+                        setSelected = {setSelectedIngredients}/>
+                    </div>
+                    {selectedIngredients.length > 0 ?
+                        <div className="pt-4">
+                            <span className="text-bold text-l"> Seleccione las cantidades</span>
+
+                            <div className = "mt-2 grid grid-cols-2 gap-y-4 gap-x-2">
+                                {selectedIngredients.map((ingredient) => 
+                                    <input placeholder={"Ingrese la cantidad de "+ingredient.name}
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text"/>
+                                )}
+                            </div>
+                        </div>
+                    :""}
+                    
 
                     <div className="mt-4">
-                        <button
+                        <a href= "/recipes"
                         type="submit"
                         className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"
                         >
@@ -78,7 +97,7 @@ function TemplateRecipe (props){
                             >
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
-                        </button>
+                        </a>
                     </div>
                     </form>
                 </div>
