@@ -1,4 +1,8 @@
-function TemplateRecipe (){
+import ComboBox from "../components/ComboBoxComponent"
+
+function TemplateRecipe (props){
+    const ingredients = props.ingredients;
+    const categories = props.categories;
     return (
         <section className="bg-gray-100">
             <div cclassNamelass="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
@@ -55,12 +59,15 @@ function TemplateRecipe (){
                         ></textarea>
                     </div>
 
+                    <ComboBox data={ingredients}/>
+                    <ComboBox data={categories}/>
+
                     <div className="mt-4">
                         <button
                         type="submit"
                         className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"
                         >
-                            <span className="font-medium"> Siguiente </span>
+                            <span className="font-medium"> Guardar </span>
 
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
