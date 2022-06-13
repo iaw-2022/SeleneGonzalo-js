@@ -1,6 +1,7 @@
 import {
   Routes,
-  Route
+  Route,
+  Navigate
 } from "react-router-dom";
 import './App.css';
 import DescriptionRecipe from "./layouts/DescriptionRecipe";
@@ -14,6 +15,7 @@ function App() {
         <Route path = '/recipes' element = {<Recipes />} />
         <Route path = '/recipe/:id' element = {<DescriptionRecipe />} />
         <Route path = '/recipe/create' element = {<CreateRecipe />} />
+        <Route path = '/' element = {<Navigate to="/recipes" replace />} />
       </Routes>
     </div>
   );
