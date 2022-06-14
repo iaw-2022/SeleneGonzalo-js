@@ -1,12 +1,10 @@
-import { recipes } from "../data/RecipesData";
 
 function DescriptionCard (props){    
     
     const recipe = props.recipe;
     const ingredients = props.ingredients;
     const categories = props.categories;
-
-    {console.log(ingredients)}
+    
     return (
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div className="grid lg:grid-cols-2">

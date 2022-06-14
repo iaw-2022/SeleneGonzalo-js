@@ -1,16 +1,17 @@
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import TemplateRecipe from "../components/TemplateRecipe"
-import IngredientsData from "../data/IngredientsData" 
 import {useState, useEffect } from 'react'
 
 export default function CreateRecipe(){
     const [categories, setCategories] = useState([]);
+    const [ingredients, setIngredients] = useState([]);
     const [error, setError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         getCategories()
+        getIngredients()
     }, []);
 
     function getCategories(){
@@ -34,12 +35,33 @@ export default function CreateRecipe(){
             },
         )
     }
+    function getIngredients(){
+        setError(false);
+        fetch('https://api-recetaccs.herokuapp.com/ingredients', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        }).then(res => res.ok ? res.json() : null)
+        .then(
+            (data) => {
+                if(data !== null){
+                    setIngredients(data)
+                    setIsLoaded(true)
+                }else{
+                    setError(true);
+                    setIsLoaded(true);
+                }
+            },
+        )
+    }
     return (
         <div className = "flex flex-col h-screen justify-between">
             <Header />
             {isLoaded ? 
                 !error ?
-                    <TemplateRecipe ingredients={IngredientsData} categories={categories}/>
+                    <TemplateRecipe ingredients={ingredients} categories={categories}/>
                 :
                 <h1> ERROR </h1>
             :
