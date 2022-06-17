@@ -1,7 +1,34 @@
-
+import {useAuth0} from '@auth0/auth0-react'
 function Header (){
+    const {
+        loginWithPopup,
+        loginWithRedirect,
+        logout,
+        user,
+        isAuthenticated,
+    } = useAuth0()
     return (
         <header class="text-gray-600 body-font shadow-xl dark:bg-yellow-300">
+            <div className='app'>
+                <h1> Inicio </h1>
+                <ul>
+                    <li>
+                        <button onClick={loginWithPopup}> Popup </button>
+                    </li>
+                    <li>
+                        <button onClick={loginWithRedirect}> Redirect </button>
+                    </li>
+                    <li>
+                        <button onClick={logout}> Log out </button>
+                    </li>
+                </ul>
+                <h3> Usuario { isAuthenticated ? "autenticado" : "no autenticado" } </h3>
+                { isAuthenticated && (
+                    <pre style = {{textAlign: 'start'}}>
+                        {JSON.stringify(user, null, 2)}
+                    </pre>
+                )}
+            </div>
             <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row justify-around items-center">
                 <a class="flex-shrink-0 mx-auto" href="/recipes">
                     <img class="block lg:block h-16 " src="https://logos-download.com/wp-content/uploads/2021/01/Sin_T.A.C.C._Logo.png" alt="Logo"/>
