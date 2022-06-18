@@ -12,10 +12,10 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path = '/' element = {<Navigate to="/recipes" replace />} />
         <Route path = '/recipes' element = {<Recipes />} />
         <Route path = '/recipe/:id' element = {<DescriptionRecipe />} />
         <Route path = '/recipe/create' element = {<CreateRecipe />} />
-        <Route path = '/' element = {<Navigate to="/recipes" replace />} />
       </Routes>
     </div>
   );
