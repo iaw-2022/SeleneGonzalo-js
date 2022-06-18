@@ -8,21 +8,7 @@ function TemplateRecipe (props){
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
     const {getAccessTokenSilently} = useAuth0();
-
-    async function postRecipe (){
-        try{
-            
-            const response = await axios.get('http://localhost:3000',{
-                headers:{
-                    authorization: `Bearer ${token}`
-                }
-            })
-            console.log(response)
-        } catch (error){
-            console.log(error.message)
-        }
-    }
-
+    
     return (
         <section className="bg-gray-100">
             <div cclassNamelass="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">

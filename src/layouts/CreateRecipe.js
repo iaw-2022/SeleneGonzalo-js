@@ -2,18 +2,25 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import TemplateRecipe from "../components/TemplateRecipe"
 import {useState, useEffect } from 'react'
+import {useAuth0} from '@auth0/auth0-react'
 
 export default function CreateRecipe(){
     const [categories, setCategories] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [error, setError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const {getAccessTokenSilently} = useAuth0();
 
     useEffect(() => {
         getCategories()
         getIngredients()
+        printToken()
     }, []);
 
+    async function printToken(){
+        let token = await getAccessTokenSilently();
+        console.log(token);
+    }
     function getCategories(){
         setError(false);
         fetch('https://api-recetaccs.herokuapp.com/categories', {
