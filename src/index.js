@@ -14,6 +14,9 @@ root.render(
       domain='dev-c0-abgh2.us.auth0.com'
       clientId='kYM5vftNjnsVR9u9v6VLj3CkWhBmeiQg'
       redirectUri={window.location.origin}
+      cacheLocation='localstorage'
+      audience='https://localhost:3000'
+      scope='openid profile email'
     >
       <App />
     </Auth0Provider>

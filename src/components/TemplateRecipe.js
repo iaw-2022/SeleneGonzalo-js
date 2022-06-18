@@ -1,10 +1,27 @@
 import ComboBox from "../components/ComboBoxComponent"
 import { useState } from 'react'
+import { useAuth0 } from "@auth0/auth0-react";
+
 function TemplateRecipe (props){
     const ingredients = props.ingredients;
     const categories = props.categories;
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
+    const {getAccessTokenSilently} = useAuth0();
+
+    async function postRecipe (){
+        try{
+            
+            const response = await axios.get('http://localhost:3000',{
+                headers:{
+                    authorization: `Bearer ${token}`
+                }
+            })
+            console.log(response)
+        } catch (error){
+            console.log(error.message)
+        }
+    }
 
     return (
         <section className="bg-gray-100">
@@ -64,8 +81,7 @@ function TemplateRecipe (props){
 
                     <div className = "grid grid-cols-2 gap-4">
                         <ComboBox data={categories} placeholder={"Seleccione las categorías"} setSelected = {setSelectedCategories}/>
-                        <ComboBox data={ingredients} placeholder={"Seleccione los ingredientes"} 
-                        setSelected = {setSelectedIngredients}/>
+                        <ComboBox data={ingredients} placeholder={"Seleccione los ingredientes"} setSelected = {setSelectedIngredients}/>
                     </div>
                     {selectedIngredients.length > 0 ?
                         <div className="pt-4">
@@ -80,7 +96,6 @@ function TemplateRecipe (props){
                         </div>
                     :""}
                     
-
                     <div className="mt-4">
                         <a href= "/recipes"
                         type="submit"

@@ -6,7 +6,7 @@ function Header (){
         user,
         isAuthenticated,
     } = useAuth0()
-
+    
     return (
         <header className="text-gray-600 body-font shadow-xl dark:bg-yellow-300">
             <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row justify-around items-center">
