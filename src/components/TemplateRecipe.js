@@ -1,14 +1,73 @@
 import ComboBox from "../components/ComboBoxComponent"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 
 function TemplateRecipe (props){
     const ingredients = props.ingredients;
     const categories = props.categories;
+    const [recipe, setRecipe] = useState([]);
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
     const {getAccessTokenSilently} = useAuth0();
+
+    useEffect(() => {
+        postRecipe()
+        postIngredients()
+        postCategories()
+    }, []);
     
+    async function postRecipe(){
+        const token = await getAccessTokenSilently()
+        console.log(token)
+        fetch('https://api-recetaccs.herokuapp.com/recipes', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}` 
+        },
+        body: {
+            'name': '$("#name").val()',
+            'image': '$("#image").val()',
+            'description': '$("#description").val()'
+        },
+        }).then(res => res.ok ? res.json() : null)
+        .then(
+            (data) => {
+                if(data !== null){
+                    setRecipe(data)
+                }
+            },
+        )
+    }
+
+    function postIngredients(){
+        fetch('https://api-recetaccs.herokuapp.com/ingredients/recipe', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: {
+
+        }, 
+        })
+    }
+
+    function postCategories(){
+        fetch('https://api-recetaccs.herokuapp.com/categories/recipe', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: {
+            'id_recipe': recipe.id,
+            'id_category': ''
+        },
+        })
+    }
+
     return (
         <section className="bg-gray-100">
             <div cclassNamelass="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
@@ -48,7 +107,7 @@ function TemplateRecipe (props){
                                             <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                                 Seleccione una imagen</p>
                                         </div>
-                                        <input type="file" className="opacity-0" />
+                                        <input id ="image" type="file" className="opacity-0" />
                                     </label>
                                 </div>
                             </div>
@@ -57,12 +116,7 @@ function TemplateRecipe (props){
 
                     <div>
                         <label className="sr-only" for="message">Descripción</label>
-                        <textarea
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        placeholder="Descripción"
-                        rows="8"
-                        id="message"
-                        ></textarea>
+                        <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Descripción" rows="8" id="description"></textarea>
                     </div>
 
                     <div className = "grid grid-cols-2 gap-4">
@@ -83,19 +137,9 @@ function TemplateRecipe (props){
                     :""}
                     
                     <div className="mt-4">
-                        <a href= "/recipes"
-                        type="submit"
-                        className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"
-                        >
+                        <a href= "/recipes" type="submit" className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
                             <span className="font-medium"> Guardar </span>
-
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-5 h-5 ml-3"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
                         </a>
