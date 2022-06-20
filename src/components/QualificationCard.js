@@ -33,8 +33,9 @@ function QualificationCard (props){
                 {qualification.commentary}
             </p>
             <div class="mt-12 mb-6 flex justify-center">
+                {console.log(user.image)}
                 <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
+                src={user.image}
                 class="rounded-full w-24 h-24 shadow-lg"
                 alt="smaple image"
                 />
