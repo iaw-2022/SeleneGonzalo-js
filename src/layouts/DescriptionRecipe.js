@@ -1,9 +1,9 @@
-import Header from "../components/Header"
-import Footer from "../components/Footer"
 import DescriptionCard from "../components/DescriptionCard"
 import QualificationCard from "../components/QualificationCard"
 import {useState, useEffect} from 'react'
 import { useParams } from "react-router-dom";
+
+import Footer from "../components/Footer";
 
 export default function DescriptionRecipe (){
     const {id} = useParams();
@@ -96,7 +96,7 @@ export default function DescriptionRecipe (){
     
     return (
         <div>
-            <Header />
+            
             <DescriptionCard recipe={recipe} ingredients ={ingredients} categories={categories} key={id}/>
             <div id="carouselExampleCaptions" className="mb-6 carousel slide relative carousel-dark" data-bs-ride="carousel">
                 <div className="carousel-inner relative w-full overflow-hidden">
@@ -132,7 +132,6 @@ export default function DescriptionRecipe (){
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
-            <Footer/> 
         </div>
     )
 }

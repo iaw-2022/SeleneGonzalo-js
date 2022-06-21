@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 
 function DescriptionCard (props){    
-    const {getAccessTokenSilently} = useAuth0();
+    const {getAccessTokenSilently,isAuthenticated} = useAuth0();
     const recipe = props.recipe;
     const ingredients = props.ingredients;
     const categories = props.categories;
@@ -40,7 +40,7 @@ function DescriptionCard (props){
     }
 
     return (
-        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 h-screen">
             <div className="grid lg:grid-cols-2">
                 <div className="flex flex-col justify-center">
                     <div className="max-w-xl mb-6">
@@ -83,12 +83,7 @@ function DescriptionCard (props){
                                 <li className="flex justify-items-center">
                                     <span className="mr-1">
                                         <svg className="w-5 h-5 mt-px text-deep-purple-accent-400" stroke="currentColor" viewBox="0 0 52 52">
-                                            <polygon
-                                            strokeWidth="4"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            fill="none"
-                                            points="29 13 14 29 25 29 23 39 38 23 27 23"
+                                            <polygon strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" points="29 13 14 29 25 29 23 39 38 23 27 23"
                                             />
                                         </svg>
                                     </span>
@@ -99,27 +94,26 @@ function DescriptionCard (props){
                     </div>
                 </div>
                 <img
-                    className="mx-auto max-w-96 object-cover h-56 rounded-xl shadow-lg sm:h-96 object-scale-down"
-                    src={recipe.image}
-                    alt=""
-                />
+                    className="mx-auto max-w-96 object-cover h-56 rounded-xl shadow-lg sm:h-96 object-scale-down" src={recipe.image}/>
 
             </div>
-            <button type="button" data-modal-toggle="exampleModal" class="mt-5 px-6 py-2.5 bg-yellow-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModal"> Calificar </button>
+            
+            { isAuthenticated && (
+                <button type="button" data-modal-toggle="exampleModal" className="mt-5 px-6 py-2.5 bg-yellow-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModal"> Calificar </button>
+            )}
 
-            <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+            <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
             id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog relative w-auto pointer-events-none">
+                <div className="modal-dialog relative w-auto pointer-events-none">
                     <div
-                    class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                        <div
-                            class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                    className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                        <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                             <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">Calificación</h5>
                             <button type="button"
                             class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
                             data-bs-dismiss="modal" aria-label="Cerrar"></button>
                         </div>
-                        <div class="modal-body relative p-4">
+                        <div className="modal-body relative p-4">
                             <div>
                                 <label className="sr-only" for="message">Calificación</label>
                                 <textarea
