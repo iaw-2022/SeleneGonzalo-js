@@ -5,20 +5,22 @@ import { useAuth0 } from "@auth0/auth0-react";
 function TemplateRecipe (props){
     const ingredients = props.ingredients;
     const categories = props.categories;
-    const [recipe, setRecipe] = useState([]);
+    const [id_recipe, setIdRecipe] = useState([]);
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
     const {getAccessTokenSilently} = useAuth0();
+    const [name, setName] = useState([]);
+    const [image, setImage] = useState([]);
+    const [description, setDescription] = useState([]);
 
-    useEffect(() => {
-        postRecipe()
-        postIngredients()
-        postCategories()
-    }, []);
-    
+    function createRecipe(){
+        console.log("ENTRO")
+        postRecipe().then();
+    }
+
     async function postRecipe(){
         const token = await getAccessTokenSilently()
-        console.log(token)
+        console.log(name)
         fetch('https://api-recetaccs.herokuapp.com/recipes', {
         method: 'POST',
         headers: {
@@ -27,15 +29,15 @@ function TemplateRecipe (props){
             'authorization': `Bearer ${token}` 
         },
         body: {
-            'name': '$("#name").val()',
-            'image': '$("#image").val()',
-            'description': '$("#description").val()'
+            'name': name,
+            'image': '',
+            'description': ''
         },
         }).then(res => res.ok ? res.json() : null)
         .then(
             (data) => {
                 if(data !== null){
-                    setRecipe(data)
+                    setIdRecipe(data)
                 }
             },
         )
@@ -49,7 +51,7 @@ function TemplateRecipe (props){
             'Content-Type': 'application/json',
         },
         body: {
-
+            'id_recipe': id_recipe
         }, 
         })
     }
@@ -62,7 +64,7 @@ function TemplateRecipe (props){
             'Content-Type': 'application/json',
         },
         body: {
-            'id_recipe': recipe.id,
+            'id_recipe': id_recipe,
             'id_category': ''
         },
         })
@@ -70,7 +72,7 @@ function TemplateRecipe (props){
 
     return (
         <section className="bg-gray-100">
-            <div cclassNamelass="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+            <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
                 <div className="lg:py-12 lg:col-span-2">
                     <p className="max-w-xl text-lg">
@@ -85,8 +87,8 @@ function TemplateRecipe (props){
                 <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3">
                     <form action="" className="space-y-4">
                     <div>
-                        <label className="sr-only" for="name">Nombre de la receta</label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Nombre receta" type="text" id="name" />
+                        <label className="sr-only" htmlFor="name">Nombre de la receta</label>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Nombre receta" type="text" id="name" value = {name} onChange = {e=>setName(e.target.value)} />
                     </div>
 
                     <div className="flex justify-center mt-8">
@@ -100,9 +102,9 @@ function TemplateRecipe (props){
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 className="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
                                                 fill="currentColor">
-                                                <path fill-rule="evenodd"
+                                                <path fillRule="evenodd"
                                                     d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                                    clip-rule="evenodd" />
+                                                    clipRule="evenodd" />
                                             </svg>
                                             <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                                 Seleccione una imagen</p>
@@ -115,7 +117,7 @@ function TemplateRecipe (props){
                     </div>
 
                     <div>
-                        <label className="sr-only" for="message">Descripción</label>
+                        <label className="sr-only" htmlFor="message">Descripción</label>
                         <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Descripción" rows="8" id="description"></textarea>
                     </div>
 
@@ -137,12 +139,12 @@ function TemplateRecipe (props){
                     :""}
                     
                     <div className="mt-4">
-                        <a href= "/recipes" type="submit" className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
-                            <span className="font-medium"> Guardar </span>
+                        {/* <a href= "/recipes" type="submit" className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"> */}
+                            <button className="font-medium" onClick={createRecipe()}> Guardar </button>
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
-                        </a>
+                        {/* </a> */}
                     </div>
                     </form>
                 </div>
