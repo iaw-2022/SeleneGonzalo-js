@@ -9,18 +9,28 @@ function TemplateRecipe (props){
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
     const {getAccessTokenSilently} = useAuth0();
-    const [name, setName] = useState([]);
-    const [image, setImage] = useState([]);
-    const [description, setDescription] = useState([]);
+    const [name, setName] = useState("");
+    const [image, setImage] = useState("");
+    const [description, setDescription] = useState("");
 
     function createRecipe(){
-        console.log("ENTRO")
-        postRecipe().then();
+        postRecipe().then().catch((error)=> (console.log(error)));
+    }
+
+    function handleChangeName(event){
+        setName(event.target.value)
+    }
+
+    function handleChangeDescription(event){
+        setDescription(event.target.value)
+    }
+
+    function handleChangeImage(event){
+        setImage(event.target.value)
     }
 
     async function postRecipe(){
         const token = await getAccessTokenSilently()
-        console.log(name)
         fetch('https://api-recetaccs.herokuapp.com/recipes', {
         method: 'POST',
         headers: {
@@ -28,11 +38,11 @@ function TemplateRecipe (props){
             'Content-Type': 'application/json',
             'authorization': `Bearer ${token}` 
         },
-        body: {
-            'name': name,
-            'image': '',
-            'description': ''
-        },
+        body: JSON.stringify ({
+            name: name,
+            image: image,
+            description: description
+        }),
         }).then(res => res.ok ? res.json() : null)
         .then(
             (data) => {
@@ -80,7 +90,7 @@ function TemplateRecipe (props){
                     </p>
 
                     <div className="mt-8">
-                    <a href="" className="text-2xl font-bold text-pink-600"> Nadie nace siendo un gran cocinero... <br></br> ¡se aprende intentando!  </a>
+                    <p className="text-2xl font-bold text-pink-600"> Nadie nace siendo un gran cocinero... <br></br> ¡se aprende intentando!  </p>
                     </div>
                 </div>
 
@@ -88,37 +98,17 @@ function TemplateRecipe (props){
                     <form action="" className="space-y-4">
                     <div>
                         <label className="sr-only" htmlFor="name">Nombre de la receta</label>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Nombre receta" type="text" id="name" value = {name} onChange = {e=>setName(e.target.value)} />
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Nombre receta" type="text" id="name" onChange = {handleChangeName} />
                     </div>
 
-                    <div className="flex justify-center mt-8">
-                        <div className="rounded-lg shadow-xl bg-gray-50 lg:w-1/2">
-                            <div className="m-4">
-                                <label className="inline-block mb-2 text-gray-500">Subir
-                                    imagen (jpg,png,svg,jpeg)</label>
-                                <div className="flex items-center justify-center w-full">
-                                    <label className="flex flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                        <div className="cursor-pointer flex flex-col items-center justify-center pt-7">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                className="w-12 h-12 text-gray-400 group-hover:text-gray-600" viewBox="0 0 20 20"
-                                                fill="currentColor">
-                                                <path fillRule="evenodd"
-                                                    d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                                    clipRule="evenodd" />
-                                            </svg>
-                                            <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                                Seleccione una imagen</p>
-                                        </div>
-                                        <input id ="image" type="file" className="opacity-0" />
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                    <div>
+                        <label className="sr-only" htmlFor="name">Imagen de la receta</label>
+                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Imagen receta" type="text" id="image" onChange = {handleChangeName} />
                     </div>
 
                     <div>
                         <label className="sr-only" htmlFor="message">Descripción</label>
-                        <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Descripción" rows="8" id="description"></textarea>
+                        <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Descripción" rows="8" id="description" onChange = {handleChangeDescription}></textarea>
                     </div>
 
                     <div className = "grid grid-cols-2 gap-4">
@@ -139,12 +129,12 @@ function TemplateRecipe (props){
                     :""}
                     
                     <div className="mt-4">
-                        {/* <a href= "/recipes" type="submit" className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto"> */}
-                            <button className="font-medium" onClick={createRecipe()}> Guardar </button>
+                        <a href= "/recipes" type="submit" className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
+                            <button className="font-medium" onClick={createRecipe}> Guardar </button>
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
-                        {/* </a> */}
+                        </a>
                     </div>
                     </form>
                 </div>

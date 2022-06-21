@@ -1,10 +1,44 @@
+import { useState } from 'react'
+import { useAuth0 } from "@auth0/auth0-react";
 
 function DescriptionCard (props){    
-    
+    const {getAccessTokenSilently} = useAuth0();
     const recipe = props.recipe;
     const ingredients = props.ingredients;
     const categories = props.categories;
-    
+    const [commentary, setCommentary] = useState("");
+    const [qualification, setQualification] = useState("");
+
+    function createQualification(){
+        postQualification().then().catch((error)=> (console.log(error)));
+    }
+
+    function handleChangeCommentary(event){
+        setCommentary(event.target.value)
+    }
+
+    function handleChangeQualification(event){
+        setQualification(event.target.value)
+    }
+
+    async function postQualification(){
+        const token = await getAccessTokenSilently();
+        fetch('https://api-recetaccs.herokuapp.com/qualifies', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}` 
+        },
+        body: JSON.stringify ({
+            id_recipe: recipe.id,
+            commentary: commentary,
+            qualification: qualification
+        }),
+        }).then(res => res.ok ? res.json() : null);
+        document.location.reload(true);
+    }
+
     return (
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div className="grid lg:grid-cols-2">
@@ -24,8 +58,6 @@ function DescriptionCard (props){
                             </span>{' '}
                         </h2>
                         <p className="max-w-lg mb-6 font-sans text-sm tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
-                            Por {recipe.user} <br></br>
-                            
                             <div className="max-w-lg mb-6 font-sans text-sm tracking-tight text-gray-900 sm:text-2xl sm:leading-none">
                                 <ul className="pt-3 grid grid-cols-2">
                                     {categories.map( (category) => 
@@ -94,51 +126,22 @@ function DescriptionCard (props){
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Calificación"
                                 rows="4"
-                                id="message"
-                                ></textarea>
+                                id="commentary" onChange = {handleChangeCommentary}></textarea>
                                 <textarea
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 placeholder="Puntaje"
                                 rows="1"
-                                id="message"
-                                ></textarea>
+                                id="qualification" onChange = {handleChangeQualification}></textarea>
                             </div>
                         </div>
-                        <div
-                            class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                            <button type="button" class="px-6
-                            py-2.5
-                            bg-red-600
-                            text-white
-                            font-medium
-                            text-xs
-                            leading-tight
-                            uppercase
-                            rounded
-                            shadow-md
-                            hover:bg-red-700 hover:shadow-lg
-                            focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0
-                            active:bg-red-800 active:shadow-lg
-                            transition
-                            duration-150
-                            ease-in-out" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="px-6
-                        py-2.5
-                        bg-green-600
-                        text-white
-                        font-medium
-                        text-xs
-                        leading-tight
-                        uppercase
-                        rounded
-                        shadow-md
-                        hover:bg-green-700 hover:shadow-lg
-                        focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0
-                        active:bg-green-800 active:shadow-lg
-                        transition
-                        duration-150
-                        ease-in-out
-                        ml-1">Guardar</button>
+                        <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                            <button type="button" className="px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg
+                            focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
+                                Cancelar
+                            </button>
+                            
+                            <button type="button" className="px-6
+                            py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out ml-1" onClick={createQualification}>Guardar</button>
                         </div>
                     </div>
                 </div>

@@ -28,22 +28,19 @@ function QualificationCard (props){
     }
 
     return(
-        <div class={"carousel-item relative float-left w-full text-center ".concat(index === 0? "active": "")}>
-            <p class="text-xl italic mx-auto text-gray-700 max-w-4xl">
+        <div className={"carousel-item relative float-left w-full text-center ".concat(index === 0? "active": "")}>
+            <p className="text-xl italic mx-auto text-gray-700 max-w-4xl">
                 {qualification.commentary}
             </p>
-            <div class="mt-12 mb-6 flex justify-center">
+            <div className="mt-12 mb-6 flex justify-center">
                 {console.log(user.image)}
-                <img
-                src={user.image}
-                class="rounded-full w-24 h-24 shadow-lg"
-                alt="smaple image"
+                <img src={user.image} className="rounded-full w-24 h-24 shadow-lg" alt="smaple image"
                 />
             </div>
-            <p class="text-xl italic mx-auto text-gray-700 max-w-4xl">
+            <p className="text-xl italic mx-auto text-gray-700 max-w-4xl">
                 {qualification.qualification}
             </p>
-            <p class="text-gray-500"> {user.name} </p>
+            <p className="text-gray-500"> {user.name} </p>
         </div>
     )
 }
