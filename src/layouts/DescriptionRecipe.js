@@ -3,8 +3,6 @@ import QualificationCard from "../components/QualificationCard"
 import {useState, useEffect} from 'react'
 import { useParams } from "react-router-dom";
 
-import Footer from "../components/Footer";
-
 export default function DescriptionRecipe (){
     const {id} = useParams();
     const [categories, setCategories] = useState([]);
@@ -96,7 +94,6 @@ export default function DescriptionRecipe (){
     
     return (
         <div>
-            
             <DescriptionCard recipe={recipe} ingredients ={ingredients} categories={categories} key={id}/>
             <div id="carouselExampleCaptions" className="mb-6 carousel slide relative carousel-dark" data-bs-ride="carousel">
                 <div className="carousel-inner relative w-full overflow-hidden">
@@ -106,7 +103,7 @@ export default function DescriptionRecipe (){
                             <QualificationCard qualification={qualification} index={index} key={qualification.id}/>
                         )))
                         :
-                        <h1> Aún no hay calificaciones, ¡sé el primero en comentar! </h1>
+                        <h1 className="text-center"> Aún no hay calificaciones, ¡sé el primero en comentar! </h1>
                     :
                         <div className="spinner-grow inline-block w-8 h-8 bg-current rounded-full opacity-0 text-yellow-500 mx-auto" role="status">
                             <span className="visually-hidden">Loading...</span>

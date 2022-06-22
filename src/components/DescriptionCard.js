@@ -23,6 +23,7 @@ function DescriptionCard (props){
 
     async function postQualification(){
         const token = await getAccessTokenSilently();
+        console.log(recipe)
         fetch('https://api-recetaccs.herokuapp.com/qualifies', {
         method: 'POST',
         headers: {
@@ -35,16 +36,15 @@ function DescriptionCard (props){
             commentary: commentary,
             qualification: qualification
         }),
-        }).then(res => res.ok ? res.json() : null);
-        document.location.reload(true);
+        }).then(res => res.ok ? res.json() : null).then(() => document.location.reload(true));
     }
 
     return (
-        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 h-screen">
+        <div className="flex flex-col justify-center px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div className="grid lg:grid-cols-2">
                 <div className="flex flex-col justify-center">
                     <div className="max-w-xl mb-6">
-                        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl ">
+                        <h2 className="text-center max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl ">
                             <span className="relative inline-block">
                                 <svg viewBox="0 0 52 24" fill="currentColor" className="absolute top-0 left-2 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
                                     <defs>
@@ -76,7 +76,6 @@ function DescriptionCard (props){
                         </p>
                     </div>
 
-                    
                     <div className="grid space-y-3 sm:gap-2 sm:grid-cols-2 sm:space-y-0">
                         {ingredients.map( (ingredient) => 
                             <ul className="space-y-3">
@@ -95,11 +94,10 @@ function DescriptionCard (props){
                 </div>
                 <img
                     className="mx-auto max-w-96 object-cover h-56 rounded-xl shadow-lg sm:h-96 object-scale-down" src={recipe.image}/>
-
             </div>
-            
+
             { isAuthenticated && (
-                <button type="button" data-modal-toggle="exampleModal" className="mt-5 px-6 py-2.5 bg-yellow-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModal"> Calificar </button>
+                <button type="button" data-modal-toggle="exampleModal" className="mx-auto mt-5 px-6 py-2.5 bg-yellow-600 text-white font-medium text-md leading-tight uppercase rounded shadow-md hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-toggle="modal" data-bs-target="#exampleModal"> Calificar </button>
             )}
 
             <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"

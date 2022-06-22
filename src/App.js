@@ -7,7 +7,7 @@ import Recipes from "./layouts/Recipes";
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex flex-col justify-between">
       <Header/>
       <Routes>
         <Route path = '/' element = {<Navigate to="/recipes" replace />} />

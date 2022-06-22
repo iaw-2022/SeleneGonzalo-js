@@ -1,7 +1,5 @@
 import RecipeCard from "../components/RecipeCard"
 import {useState, useEffect } from 'react'
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 
 export default function Recipes (){
     const [recipes, setRecipes] = useState([]);
@@ -34,8 +32,7 @@ export default function Recipes (){
         )
     }
     return (
-        
-        <div className = "flex flex-col h-screen justify-between">
+        <div className = "flex flex-col justify-between mx-auto">
             <div className="my-auto grid 2xl:grid-cols-5 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 mt-4">
                 {isLoaded ? 
                     !error ?
