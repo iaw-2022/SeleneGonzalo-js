@@ -1,6 +1,6 @@
 function Footer(){
     return(
-        <footer className="bottom-0 left-0 w-full flex flex-col items-center justify-between px-6 py-4 bg-white dark:bg-slate-200 sm:flex-row">
+        <footer className="mt-8 bottom-0 left-0 w-full flex flex-col items-center justify-between px-6 py-4 bg-white dark:bg-slate-200 sm:flex-row">
             <p className="text-xl font-bold text-gray-800 dark:text-black">RECETACCS</p>
             
             <p className="py-2 text-gray-800 dark:text-black sm:py-0">Todos los derechos reservados</p>
