@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
+import { useForm } from "react-hook-form";
 
 function DescriptionCard (props){    
     const {getAccessTokenSilently,isAuthenticated} = useAuth0();
@@ -8,9 +9,10 @@ function DescriptionCard (props){
     const categories = props.categories;
     const [commentary, setCommentary] = useState("");
     const [qualification, setQualification] = useState("");
+    const { register } = useForm();
 
     function createQualification(){
-        postQualification().then().catch((error)=> (console.log(error)));
+        postQualification().then().catch();
     }
 
     function handleChangeCommentary(event){
@@ -23,7 +25,6 @@ function DescriptionCard (props){
 
     async function postQualification(){
         const token = await getAccessTokenSilently();
-        console.log(recipe)
         fetch('https://api-recetaccs.herokuapp.com/qualifies', {
         method: 'POST',
         headers: {
@@ -108,22 +109,15 @@ function DescriptionCard (props){
                         <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                             <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">Calificación</h5>
                             <button type="button"
-                            class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                            className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
                             data-bs-dismiss="modal" aria-label="Cerrar"></button>
                         </div>
                         <div className="modal-body relative p-4">
                             <div>
                                 <label className="sr-only" for="message">Calificación</label>
-                                <textarea
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Calificación"
-                                rows="4"
-                                id="commentary" onChange = {handleChangeCommentary}></textarea>
-                                <textarea
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Puntaje"
-                                rows="1"
-                                id="qualification" onChange = {handleChangeQualification}></textarea>
+                                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="Comentario" rows="4" id="commentary" onChange = {handleChangeCommentary}/>
+                                <input className="mt-4 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Puntaje" rows="1" id="qualification" onChange = {handleChangeQualification}/>
                             </div>
                         </div>
                         <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">

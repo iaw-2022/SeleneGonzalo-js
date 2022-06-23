@@ -103,7 +103,7 @@ export default function DescriptionRecipe (){
                             <QualificationCard qualification={qualification} index={index} key={qualification.id}/>
                         )))
                         :
-                        <h1 className="text-center"> Aún no hay calificaciones, ¡sé el primero en comentar! </h1>
+                        <h1 className="text-center text-base text-gray-700 md:text-lg"> Aún no hay calificaciones, ¡sé el primero en comentar! </h1>
                     :
                         <div className="spinner-grow inline-block w-8 h-8 bg-current rounded-full opacity-0 text-yellow-500 mx-auto" role="status">
                             <span className="visually-hidden">Loading...</span>

@@ -20,7 +20,7 @@ function Header (){
                 </nav>
 
                 <div className='mx-auto auth0'>
-                    {console.log(isAuthenticated)}
+                    {isAuthenticated}
                     <h3>{ isAuthenticated ? <button className = "bg-slate-100 hover:bg-gray-400 text-black font-semibold py-2 px-4 rounded shadow" onClick={logout}> Cerrar sesión </button> : <button className = "bg-slate-100 hover:bg-gray-400 text-black font-semibold py-2 px-4 rounded shadow" onClick={loginWithPopup}> Ingresar </button> } </h3>
                 </div>
             </div>
