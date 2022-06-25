@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
-import { useForm } from "react-hook-form";
 
 function DescriptionCard (props){    
     const {getAccessTokenSilently,isAuthenticated} = useAuth0();
@@ -9,7 +8,7 @@ function DescriptionCard (props){
     const categories = props.categories;
     const [commentary, setCommentary] = useState("");
     const [qualification, setQualification] = useState("");
-    const { register } = useForm();
+    const [formErrors, setFormErrors] = useState({});
 
     function createQualification(){
         postQualification().then().catch();
@@ -17,10 +16,35 @@ function DescriptionCard (props){
 
     function handleChangeCommentary(event){
         setCommentary(event.target.value)
+        setFormErrors(validate());
     }
 
     function handleChangeQualification(event){
         setQualification(event.target.value)
+        setFormErrors(validate());
+    }
+
+    function handleSubmitForm (event){
+        event.preventDefault()
+        setFormErrors(validate());
+        if (Object.keys(formErrors).length === 0){
+            createQualification()
+        }
+    }
+
+    useEffect(() =>{
+        setFormErrors(validate());
+    })
+
+    function validate(){
+        const errors = {};
+        if (commentary === ""){
+            errors.commentary = "*El comentario es requerido"
+        }
+        if (qualification === ""){
+            errors.qualification = "*El puntaje es requerido"
+        }
+        return errors;
     }
 
     async function postQualification(){
@@ -112,23 +136,31 @@ function DescriptionCard (props){
                             className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
                             data-bs-dismiss="modal" aria-label="Cerrar"></button>
                         </div>
+                        
                         <div className="modal-body relative p-4">
-                            <div>
+                            <form onSubmit={handleSubmitForm}>
                                 <label className="sr-only" for="message">Calificación</label>
-                                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Comentario" rows="4" id="commentary" onChange = {handleChangeCommentary}/>
-                                <input className="mt-4 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Puntaje" rows="1" id="qualification" onChange = {handleChangeQualification}/>
-                            </div>
+
+                                <input type = "text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Comentario" rows="4" id="commentary" value = {commentary} onChange = {handleChangeCommentary}/>
+
+                                <p> { formErrors.commentary } </p>
+
+                                <input type = "text" className="mt-4 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Puntaje" rows="1" id="qualification" value = {qualification} onChange = {handleChangeQualification}/>
+
+                                <p> { formErrors.qualification } </p>
+
+                                <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                                    <button type="button" className="px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg
+                                    focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
+                                    Cancelar
+                                    </button>
+                                
+                                    <button type="submit" className="px-6
+                                    py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out ml-1">Guardar</button>
+                                </div>
+                            </form>
                         </div>
-                        <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                            <button type="button" className="px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg
-                            focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out" data-bs-dismiss="modal">
-                                Cancelar
-                            </button>
-                            
-                            <button type="button" className="px-6
-                            py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out ml-1" onClick={createQualification}>Guardar</button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
