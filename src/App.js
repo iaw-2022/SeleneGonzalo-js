@@ -1,23 +1,18 @@
-import logo from './logo.svg';
+import { Routes, Route, Navigate } from "react-router-dom";
 import './App.css';
+import Header from "./components/Header";
+import DescriptionRecipe from "./layouts/DescriptionRecipe";
+import Recipes from "./layouts/Recipes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col justify-between">
+      <Header/>
+      <Routes>
+        <Route path = '/' element = {<Navigate to="/recipes" replace />} />
+        <Route path = '/recipes' element = {<Recipes />} />
+        <Route path = '/recipe/:id' element = {<DescriptionRecipe />} />
+      </Routes>
     </div>
   );
 }
